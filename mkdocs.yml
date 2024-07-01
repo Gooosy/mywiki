@@ -17,6 +17,13 @@ theme:
     - navigation.indexes
     - toc.integrate
     - content.code.annotate
+
+markdown_extensions:
+  - admonition
+  - codehilite
+  - pymdownx.arithmatex
+  - markdown.extensions.extra
+
 nav:
   - 首页: 'index.md'
   - 初心与使命: '初心和使命.md'
