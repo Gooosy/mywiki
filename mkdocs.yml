@@ -1,0 +1,42 @@
+site_name: ECE搭车客指南
+
+theme:
+  name: mkdocs
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: blue
+      accent: blue
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: blue
+  features:
+    - navigation.tabs
+    - navigation.top
+    - navigation.indexes
+    - toc.integrate
+    - content.code.annotate
+nav:
+  - 首页: 'index.md'
+  - 初心与使命: '初心和使命.md'
+  - ECE120: 
+      - 序: 'ECE120/序.md'
+      - 第一章: 'ECE120/Chapter1.md'
+  - ECE220:
+      - 序: 'ECE220/序.md'
+
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/Gooosy
+
+markdown_extensions:
+  - admonition
+  - toc:
+      permalink: true
+  - footnotes
+  - meta
+  - def_list
+  - attr_list
