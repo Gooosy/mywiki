@@ -18,28 +18,12 @@ theme:
     - toc.integrate
     - content.code.annotate
 
-markdown_extensions:
-  - admonition
-  - codehilite
-  - pymdownx.arithmatex
-  - markdown.extensions.extra
-
-nav:
-  - 首页: 'index.md'
-  - 初心与使命: '初心和使命.md'
-  - ECE120: 
-      - 序: 'ECE120/序.md'
-      - 第一章: 'ECE120/Chapter1.md'
-  - ECE220:
-      - 序: 'ECE220/序.md'
-
-
-extra:
-  social:
-    - icon: fontawesome/brands/github
-      link: https://github.com/Gooosy
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
 markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
   - admonition
   - toc:
       permalink: true
@@ -47,3 +31,16 @@ markdown_extensions:
   - meta
   - def_list
   - attr_list
+
+nav:
+  - 首页: 'index.md'
+  - 初心与使命: '初心和使命.md'
+  - ECE120: 
+      - 序: 'ECE120/序.md'
+      - 第一章: 'ECE120/Chapter1.md'
+      - 第二章: 'ECE120/Chapter2.md'
+  - ECE220:
+      - 序: 'ECE220/序.md'
+
+
+
