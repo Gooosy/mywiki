@@ -21,6 +21,9 @@ theme:
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
 
+extra_css:
+  - css/extra.css
+
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
@@ -39,6 +42,8 @@ nav:
       - 序: 'ECE120/序.md'
       - 第一章: 'ECE120/Chapter1.md'
       - 第二章: 'ECE120/Chapter2.md'
+      - 第三章: 'ECE120/Chapter3.md'
+      - 第四章: 'ECE120/Chapter4.md'
   - ECE220:
       - 序: 'ECE220/序.md'
 

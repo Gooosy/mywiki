@@ -185,9 +185,15 @@ $$
 
 减法变加法：减去一个数等于加上这个数的相反数：e.g 4 - 2 = 4 + (-2) 由前面的转化法则，我们知道，一个正数在2's complement里面要变成其相反数（对应的负数），就先取补码再加1，同样如果一个负数想要转化成相反数（相应的正数），也是先取补码再加1，因此，在2's complement里面得到相反数就是先取补码再加1 : 01001000 - 00110111 =01001000 + 11001000 + 1 = 01001000 + 11001001 = 00010001 两者相加，最高位会进一个1，本来应该是100010001，但是由于数位固定，取后8位，保留结果位00010001，那么这个影响结果的正确性嘛？-> overflow问题，见[Overflow problem](#overflow-problem)
 
+2's complement还存在一个考点：假设原来是4bits的2's complement，现在我想把它扩展成8bits的2's complement应该如何操作
+
+- 正数：简单 e.g 0111(7)，直接在前面添零，变成0000 0111（7）
+- 负数：在前面添1 e.g 1000(-8) -> 1111 1000 -> 转化 0000 0111 + 1 = 0000 1000 -> -8 不过为什么添1就是对的，假设我原来是N位2's complement，现在扩展到N+K位，原来-m用的是$2^N - m$的bit pattern，现在我希望-m用$2^{N+K} - m$的bit pattern，两者之间相差多少呢？$(2^{N+K} - m) - (2^N - m) = 2^N \times (2^k - 1)$, 其中$2^k - 1$就是111...的形式，总共有k个1，而$2^N$，联想一下多项式表达，$(2^k - 1) \times 2^N$，是不是就是从第N为开始在前面加k个1
+- 总：在前面重复符号位，直到满足数位要求
 
 
-考点：1.十进制与2's complement之间的互相转换 2.2's complement 运算的加*减*法 3.overflow问题，见[Overflow problem](#overflow-problem)
+
+考点：1.十进制与2's complement之间的互相转换 2.2's complement 运算的加*减*法 3.bits位数的扩展 4.overflow问题，见[Overflow problem](#overflow-problem)
 
 ## Fixed Point representation
 (not very important: because it is not a good representation)
@@ -264,6 +270,10 @@ Floating Point representation借用了科学计数法的想法来表示浮点数
 ## Hexadecimal
 
 与十进制的转化方式本质原理都是多项式表达，方法同unsigned-representation；与二进制转化的时候可以采取四位一转的方式，因为16 = $2^4$
+
+## 写在最后的话
+
+在计算机里，二进制不仅要表示数，还要表示很多东西，如声音，文字，都有自己的编码方式。bit pattern本身是不具有意义的，一串bits 10101010，你可以说它是unsigned编码下的170，也可是2's complement编码下的-86，还可以是ASCII编码下[line feed] [line feed]。考试的时候可能会考到对于N个不同的东西，要多少位bits才能表示这些东西 -> $\lceil \log_2 N \rceil$
 
 
 
