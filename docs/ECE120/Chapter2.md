@@ -53,6 +53,13 @@ V = $C_{n} \oplus C_{n-1}$
 
 严谨的证明：画真值表，把每种情况列出来，最后发现$C_{n} \oplus C_{n-1}$ 运算的结果和V = ABS' +  A'B'S 一样，即证明这两个表达式完全等价。（ECE120的考试，证明逻辑表达式的等价，不用多想去用boolean运算法则，直接画真值表就行）
 
-##
+## Optimize Logic Expression(K-map)
+
+<p style="font-family: Arial, sans-serif; font-size: 1em; text-align: left;">
+  ⚠️very important
+</p> 
+
+（L10-L12）
+
 
 
