@@ -113,6 +113,34 @@
             
             <li class="nav-item" data-bs-level="1"><a href="#cc-programming-language" class="nav-link">C语言(C Programming Language)</a>
               <ul class="nav flex-column">
+            <li class="nav-item" data-bs-level="2"><a href="#main-function" class="nav-link">Main Function</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#variable" class="nav-link">Variable</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#operation" class="nav-link">Operation</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#statement" class="nav-link">Statement</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#function" class="nav-link">Function</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#code-example" class="nav-link">Code Example</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
+            <li class="nav-item" data-bs-level="2"><a href="#notes" class="nav-link">Notes</a>
+              <ul class="nav flex-column">
+              </ul>
+            </li>
               </ul>
             </li>
         </ul>
@@ -121,7 +149,224 @@
                     <div class="col-md-9" role="main">
 
 <h1 id="cc-programming-language">C语言(C Programming Language)<a class="headerlink" href="#cc-programming-language" title="Permanent link">&para;</a></h1>
-<p>L6-L8</p></div>
+<p>120涉及到一点基本的C语言语法介绍，为220的programming做准备。考试对于C的要求不是很高，一般是给出一个程序，判断它的作用。</p>
+<p><img alt="c_program" src="../picture/c3/C_program.png" /></p>
+<h2 id="main-function">Main Function<a class="headerlink" href="#main-function" title="Permanent link">&para;</a></h2>
+<p>所有的C语言程序都有一个main函数，作为程序的入口点。[220知识]当一个C程序被编译并链接成可执行文件后，操作系统在加载并执行这个程序时：</p>
+<ul>
+<li>可执行文件加载到内存</li>
+<li>初始化栈堆，全局变量</li>
+<li>调用main函数，执行程序</li>
+</ul>
+<p>main函数的基本结构如下：</p>
+<pre><code class="language-c">int main() {
+    // 代码
+    return 0;
+}
+</code></pre>
+<ul>
+<li>其中'int'表示函数返回值的数据类型是整数型</li>
+<li>'main'是函数的名称（main函数作为程序的入口，其名称是固定的，而其他自定义的函数，名称可以自拟）</li>
+<li>'()'是用来传递参数的，此处括号为空，表示没有传递给main函数的参数</li>
+<li>return 0 函数的返回值，0表示程序成功执行，没有错误，非0的值表示程序执行出现异常，对main函数来说，返回值是返回给操作系统的，main函数的return语句也标志着程序的结束</li>
+</ul>
+<p>C语言函数的具体性质见<a href="./#Function">Function</a></p>
+<h2 id="variable">Variable<a class="headerlink" href="#variable" title="Permanent link">&para;</a></h2>
+<p>variable（变量）实际上是人类给存储在计算机内存中的二进制位（bits）取的名字，方便编写程序。每个变量都有一个特定的类型，该类型决定了变量可以存储的数据类型和大小。</p>
+<pre><code class="language-c">int A = 42;
+char B = 'H';
+float C;
+C = 3.1415
+</code></pre>
+<p>不同类型的数据有不同的表示方式（representation），但最终存储到计算机内存中时，都是一串二进制位（bits）。变量相当于给这串特定的二进制位取了对应的名字（220:变量名对应的是相应数据的存储地址）</p>
+<p>以上是变量初始化的三个例子，通用的格式是<code>&lt;data type&gt; &lt;identifier&gt; = &lt;value&gt;;</code> <code>&lt;data type&gt;</code>确定变量的数据类型，int？float？char？<code>&lt;identifier&gt;</code>是变量的名字，自定义，区分大小写，只能由数字，字母，下划线组成 &amp; 开头只能是字母 &amp; 不能使用关键字（即在C语言中有特殊含义的字，如if/char）<code>&lt;value&gt;</code>是初始化的值，决定了这个变量对应的内存空间里存储了什么样的bits pattern。</p>
+<p>变量可以先不初始化，<code>&lt;data type&gt; &lt;identifier&gt;;</code> 例如变量C，我先申明有这个变量，并且根据它的data type（float）为C分配内存（IEEE 754 -&gt; 32 bits），但是此时这些bits没有含义（可以理解是内存中的乱码）可能是0000 1011 1111 0000 0010这种，不一定是0，之后我再根据需要对C进行赋值</p>
+<ul>
+<li>在初始化char类型的数据的时候，要注意用' '单引号，C中单引号表示字符，双引号表示字符串</li>
+<li>变量在初始化之后可以更改值 e.g <code>A = 5;</code>把A的值从42改成了5</li>
+<li>C语言的primitive datatype的representation具体用多少个bits是不一定的，不同系统结果不同，e.g 有的系统int是16 bits 2's complement，有的系统int是32 bits 2's complement</li>
+</ul>
+<h2 id="operation">Operation<a class="headerlink" href="#operation" title="Permanent link">&para;</a></h2>
+<p>operation是用来对数据进行处理（运算）的，运算大致分为arithmetic（代数运算），bitwise boolean（逐位布尔逻辑运算），comparison（比较运算），assignment（赋值运算），logical（逻辑运算）</p>
+<h3 id="arithmetic">Arithmetic<a class="headerlink" href="#arithmetic" title="Permanent link">&para;</a></h3>
+<p>加减乘除取余数<code>+ - * / %</code></p>
+<p>C语言中的<code>/</code>是整除（直接truncated，舍弃小数位，只要整数位） e.g 100 / 3 = 33 （<code>/</code>这个operation不能改变数据类型，100和3都是整型，最后结果也要是整数型）</p>
+<p>C语言中的<code>%</code>的余数可能是负数</p>
+<ul>
+<li>运算公式：<span class="arithmatex">\(A \% B = A - (A / B) * B\)</span> 先算出A整除B的值，然后再用A减去前面算出来的值乘B</li>
+<li>-42 % 5 ：1. -42 / 5 = -8 （准确值是-8.4，直接truncated，取-8；如果是向下取整，此处应该为-9）2. -42 - (-8 * 5) =  -42 + 40 = -2</li>
+</ul>
+<h3 id="bitwise-boolean">Bitwise Boolean<a class="headerlink" href="#bitwise-boolean" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>运算符</th>
+<th>名称</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&amp;</code></td>
+<td>AND</td>
+<td>按位与（AND）</td>
+</tr>
+<tr>
+<td><code>|</code></td>
+<td>OR</td>
+<td>按位或（OR）</td>
+</tr>
+<tr>
+<td><code>~</code></td>
+<td>NOT</td>
+<td>按位取反（NOT）</td>
+</tr>
+<tr>
+<td><code>^</code></td>
+<td>XOR</td>
+<td>按位异或（XOR）</td>
+</tr>
+<tr>
+<td><code>&lt;&lt;</code></td>
+<td>左移</td>
+<td>左移（left shift）</td>
+</tr>
+<tr>
+<td><code>&gt;&gt;</code></td>
+<td>右移</td>
+<td>右移（right shift）</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>“按位运算”，<span class="arithmatex">\((a_3a_2a_1a_0)_2\)</span> | <span class="arithmatex">\((b_3b_2b_1b_0)_2\)</span> 是 <span class="arithmatex">\(a_3\)</span> | <span class="arithmatex">\(b_3\)</span> <span class="arithmatex">\(a_2\)</span> | <span class="arithmatex">\(b_2\)</span>对应的位进行运算</li>
+<li>使用前四种bitwise boolean operations的时候对应的数据类型一般是unsigned int</li>
+<li>使用<code>&gt;&gt;</code>的时候要注意数据类型，如果是unsigned int就右移n位之后在最高位添n个0；如果是int（用2's completement表示）就右移n位之后在最高位添n个sign bit（原来是负数1就添1，原来是正数0就添0）</li>
+<li>A &lt;&lt; n 相当于<span class="arithmatex">\(A \times 2^n\)</span>但可能出现overflow的情况；A &gt;&gt; n相当于<span class="arithmatex">\(A \div 2^n\)</span>（向下取整）</li>
+</ul>
+<h3 id="rationalcomparison">Rational/Comparison<a class="headerlink" href="#rationalcomparison" title="Permanent link">&para;</a></h3>
+<p>less than: <code>&lt;</code> less or equal to: <code>&lt;=</code> equal: <code>==</code> (两个等于，一个等于是assign operation) not equal: <code>!=</code> greater or equal to: <code>&gt;=</code> greater than: <code>&gt;</code></p>
+<ul>
+<li>这些operation运算完的结果是boolean值（True -&gt; 1 False -&gt; 0）</li>
+<li>结果取决于数据类型，1000 和 0111比大小，unsigned int情况下1000 &gt; 0111，int（对应2's complement表示）情况下1000 &lt; 0111 </li>
+<li>连接多个rational表达式 A &gt; B and B &gt; C用logical operation，参见<a href="#logical">logical operation</a></li>
+</ul>
+<h3 id="assignment">Assignment<a class="headerlink" href="#assignment" title="Permanent link">&para;</a></h3>
+<p>用于variable declaration（见<a href="#variable">variable</a>）</p>
+<ul>
+<li>等式的左边必须是一个variable</li>
+<li>运算的顺序是先计算等式右边，得出要赋给variable的值，然后再把这个值赋值给等式左边的variable。这种运算顺序决定了A = A + 1是合法的</li>
+</ul>
+<h3 id="logical">Logical<a class="headerlink" href="#logical" title="Permanent link">&para;</a></h3>
+<p>AND <code>&amp;&amp;</code> OR <code>||</code> NOT <code>!</code></p>
+<p>bitwise boolean operations和logical operations的区别是前者作用于一长串的bits，运算结果是一串bits，后者作用于truth value，运算结果也是truth value。在C语言中，truth value 0代表False，其他所有非0数都代表True。truth value只用真或假两种情况。</p>
+<p>e.g !120 &amp;&amp; 1 = 0 如果120前加<code>!</code> ，120会被认为是一个truth value，因为它不是0，所以表示true，not之后为False(0)， False &amp;&amp; True = False -&gt; 0</p>
+<p>AND <code>&amp;&amp;</code> OR <code>||</code> NOT <code>!</code>运算优先级顺序是“非与或”</p>
+<h2 id="statement">Statement<a class="headerlink" href="#statement" title="Permanent link">&para;</a></h2>
+<p>statement（语句）告诉电脑具体的指令/操作。statment有三种结构，sequential（顺序结构，按照statement的先后顺序一条条执行），conditional（条件选择结构，满足某种条件才执行某个statement），iteration（循环结构，在满足某种条件的情况下，某个statement被反复执行）</p>
+<pre><code class="language-c">//conditional
+if ( &lt;expression&gt; ) {
+    //如果expression的truth value为1，执行以下code
+    //codes
+} else {
+    //如果expression的truth value为0，执行以下code
+    //code
+}
+</code></pre>
+<pre><code class="language-c">//iteration
+for (&lt;init&gt;; &lt;test&gt;; &lt;update&gt;) {
+    /* loop body */
+}
+
+while (&lt;test&gt;) {
+    /* loop body */
+}
+</code></pre>
+<ul>
+<li>特别注意for循环中第一次先执行<code>&lt;init&gt;</code>然后会进行判断<code>&lt;test&gt;</code>在进入循环，所以假设判断是 a &lt; 10， init是 a = 42，那么for循环就不会被执行</li>
+<li>while循环第一次也会先test，如果test是False，循环体也不会被执行</li>
+</ul>
+<h2 id="function">Function<a class="headerlink" href="#function" title="Permanent link">&para;</a></h2>
+<pre><code class="language-c">&lt;datatype&gt; &lt;function name&gt;(&lt;parameters&gt;){
+    //codes
+    return &lt;something&gt;
+}
+</code></pre>
+<p>main函数只不过是函数中特殊的一种，实际上c语言中有各种各样的函数，函数定义的基本结构都是相同的：1.函数返回值的数据类型 2.函数名称 3.函数接收的参数 4.{} 大括号，大括号里面是实现函数的statement 5.statement最后是return语句</p>
+<ul>
+<li>C语言中的Function就是一堆代码，最后返回一个值</li>
+<li>Function不一定是 algorithm，如下function一直输出"hello"，不符合algorithm有限性的特点</li>
+</ul>
+<pre><code class="language-c">int hello() {
+    while (1) {  // 无限循环 1-&gt;True
+        printf(&quot;hello&quot;);
+    }
+    return 1;
+}
+</code></pre>
+<p>在c语言中，实现交互（输入输出）靠的就是<code>scanf</code>和<code>printf</code>这两个函数，如果想要使用这两个函数来实现input &amp; output就需要在程序的开头加入<code>#include &lt;stdio.h&gt;</code>，这行指令的作用是把<code>stdio.h</code>这个头文件加入到我们程序的开头，这样我们就不需要自己编写<code>scanf</code>和<code>printf</code>这两个函数，而可以直接使用标准输入输出库中的函数。</p>
+<p><code>printf</code> 输出到显示器上：</p>
+<ul>
+<li><strong>转义字符 <code>\</code></strong>：反斜杠用于格式化一些特殊字符。例如，换行符 <code>\n</code>。如果想要输出反斜杠本身，需要使用两个反斜杠 <code>\\</code>，前一个表示这是一个特殊字符（类似于 <code>\n</code> 前的反斜杠），后一个表示这个特殊字符是反斜杠本身</li>
+<li><strong>格式化说明符</strong>：格式化说明符用于将一串位按照某种编码方式转化为实际含义，并以字符串形式打印输出。例如，将 <code>1000</code> 转化为二进制补码下的 <code>-8</code></li>
+<li>格式化说明符的数量必须与实际要转化的数据数量一致</li>
+<li>数据类型必须与要转化的变量的数据类型匹配。下面的程序示例是错误的，因为 <code>A</code> 的类型是 <code>char</code>，但使用的格式化说明符是 <code>%d</code>，它是用来转化整型变量的</li>
+<li><strong>函数返回值</strong>：<code>printf</code>返回成功被转化并打印到显示器上的字符个数，返回值类型为整数型，返回值一般没有什么用</li>
+</ul>
+<pre><code class="language-c">char A = 'o';
+printf(&quot;The answer is %d&quot;, A);
+</code></pre>
+<p><code>scanf</code>从键盘读取数据：</p>
+<pre><code class="language-c">int A;
+printf(&quot;Please enter an integer&quot;);
+scanf(&quot;%d&quot;, &amp;A);
+</code></pre>
+<ul>
+<li><code>&amp;</code>获取变量的地址，scanf读取的输入最后要被存储到内存中，变量名（A）其实是给内存中的一块存储空间取了个名字， <code>&amp;</code>用于通过名字，获取内存地址</li>
+<li><strong>格式化说明符</strong>：要求同<code>printf</code></li>
+<li><strong>函数返回值</strong>：<code>scanf</code>返回成功被转化并存储到内存中字符的个数，返回值类型为整数型，返回值一般用于检验输入是否合法。如下程序，求输入数字的平方，通过scanf的返回值来判断输入是否合法。</li>
+</ul>
+<pre><code class="language-c">int main(){
+    int A;
+    printf(&quot;Please enter an integer&quot;);
+    if (1 != scanf(&quot;%d&quot;, &amp;A)){
+        /* the input is invalid */
+        /* e.g human type 'hhh' which is not an integer*/
+        return 1; //an error occur
+    }
+    A = A * A；
+    printf(&quot;The square of the integer is: %d&quot;, A);
+    return 0;
+}
+</code></pre>
+<h2 id="code-example">Code Example<a class="headerlink" href="#code-example" title="Permanent link">&para;</a></h2>
+<pre><code class="language-c">int main ()
+{
+    unsigned int A, B, C;
+    printf (&quot;Please enter two numbers: &quot;);
+    if (2 != scanf (&quot;%u%u&quot;, &amp;A, &amp;B)) {
+        printf (&quot;Invalid input.\n&quot;);
+        return 3;
+    }
+    for (C = 0; 0 != A; A = (A &gt;&gt; 1)) {
+        if (1 == (A &amp; 1)) {
+            C = C + B;
+        }
+        B = (B &lt;&lt; 1);
+    }
+    printf (&quot;The answer is %u.\n&quot;, C);
+    return 0;
+}
+</code></pre>
+<p>这段代码计算了 A 和 B 两个数的乘积。为什么是这样呢？可以类比一下十进制的乘法 <span class="arithmatex">\((a_1a_0)_{10} \times (b_2b_1b_0)_{10}\)</span>。我们先计算 <span class="arithmatex">\(a_0 \times (b_2b_1b_0)\)</span> 得到一个值，然后再计算 <span class="arithmatex">\(a_1 \times (b_2b_1b_0)\)</span>。由于 <span class="arithmatex">\(a_1\)</span> 是十位上的数，乘出来的结果需要乘以 10 才是正确的值。这个乘 10 的过程，我也可以对 <span class="arithmatex">\((b_2b_1b_0)\)</span> 进行操作，相当于 <span class="arithmatex">\(a_1 \times (b_2b_1b_00)\)</span>  --- 想象一下列竖式乘法</p>
+<p>因此，在计算二进制的乘法时也是这样，把A的每一个位分别取出来，与B相乘，每次乘完，B就乘2（left shift）</p>
+<h2 id="notes">Notes<a class="headerlink" href="#notes" title="Permanent link">&para;</a></h2>
+<p>其他有可能考到的点：</p>
+<ul>
+<li>Test程序：full code coverage，意思是test至少要保证程序中的每个语句都执行过一遍，如在设计测试样例的时候，对于if else语句，就要构造两个样例，一个测试if，一个测试else （220有考过给一段C语言程序，判断至少要几个测试样例才能实现full code coverage）</li>
+<li>Floating Point Problem：当一个非常大的数和一个非常小的数相加的时候，结果可能不能被floating point representation表示，导致一些程序中的错误。参见<a href="../Chapter1/#floating-point-representation">Floating Point Representation</a></li>
+<li>写程序的时候别忘了在每个statement后面加<code>;</code> !!!</li>
+</ul></div>
             </div>
         </div>
 

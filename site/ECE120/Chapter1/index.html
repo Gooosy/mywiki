@@ -159,7 +159,7 @@
 <p>N-bits unsign representation：二进制+补零对齐(补足N位)</p>
 <ul>
 <li>如何从二进制转化到十进制 --按位计算</li>
-<li>如何从十进制转化到二进制 --中国宝宝用辗转相除</li>
+<li>如何从十进制转化到二进制 --中国宝宝短除法</li>
 </ul>
 <p>应付考试的话会算就可以了，但是此处ppt解释了进制转化的原理，其实对于K进制，原理都是相通的（把一个数表达成关于K的多项式）</p>
 <p>例如，对于 K 进制数 <span class="arithmatex">\((a_4a_3a_2a_1a_0)_k\)</span>:</p>
@@ -175,7 +175,7 @@
 <div class="arithmatex">\[
 \frac{a_4 \times k^3 + a_3 \times k^2 + a_2 \times k^1 + a_1 \times k^0}{k} \quad \text{余} \quad a_1
 \]</div>
-<p>得出 <span class="arithmatex">\(a_1\)</span>，到这里就可以看出为什么辗转相除，最后的余数结果是需要倒着写回去的。</p>
+<p>得出 <span class="arithmatex">\(a_1\)</span>，到这里就可以看出为什么短除法，最后的余数结果是需要倒着写回去的。</p>
 <p>基于把各个进制的数表达为一个多项式，我们可以实现任意进制之间的转化。</p>
 <p>e.g <span class="arithmatex">\((101010)_2\)</span> &lt;-&gt; <span class="arithmatex">\((42)_{10}\)</span></p>
 <p>如：二进制到十进制:</p>
@@ -255,7 +255,7 @@ $$
 <p>-K 用的是<span class="arithmatex">\(2^N - K\)</span>的pattern</p>
 <ul>
 <li>确定是多少bit的2's complement (e.g 7-bits 2's complement)</li>
-<li>从十进制转化到二进制：e.g -42 用的是 <span class="arithmatex">\(2^7 = 126 - 42 = 86\)</span>用的是86的pattern，再把86这个数直接转化成二进制就是-42的7-bits 2's complement表示（如何转化参考unsigned representation辗转相除法），得1010110</li>
+<li>从十进制转化到二进制：e.g -42 用的是 <span class="arithmatex">\(2^7 = 128 - 42 = 86\)</span>用的是86的pattern，再把86这个数直接转化成二进制就是-42的7-bits 2's complement表示（如何转化参考unsigned representation短除法），得1010110</li>
 <li>从二进制转化到十进制：<span class="arithmatex">\((1010110)_2\)</span>表示的十进制数是多少？先看首位，1开头，确定是负数；再把这个数直接转化成十进制，<span class="arithmatex">\(1*2^6 + 1*2^4 + 1*2^2 + 1*2^1 = 86\)</span>; 再用<span class="arithmatex">\(2^7\)</span>减去86，得到42，最后加上符号</li>
 </ul>
 <p>补充（二进制转化到十进制简化）：转化过程无非是把<span class="arithmatex">\(2^N - K\)</span>先转化成十进制，然后减去<span class="arithmatex">\(2^N\)</span>，由于2's complement里面的负数都有一个特性，就是开头必定是1，所以一定会有<span class="arithmatex">\(1*2^{N-1}\)</span>这一项，可以把<span class="arithmatex">\(1*2^{N-1}\)</span>和<span class="arithmatex">\(-2^N\)</span>合并一下，就变成了<span class="arithmatex">\(-2^{N-1}\)</span>,所以就是第一位1前加负号，其他正常运算<span class="arithmatex">\(-1*2^6 + 1*2^4 + 1*2^2 + 1*2^1 = -42\)</span>直接得到结果</p>
@@ -265,7 +265,7 @@ $$
 <li>从十进制转化到二进制</li>
 <li>1.确定转化的数位(e.g 7-bits 2's complement)</li>
 <li>2.确定要转化的数是正数还是负数(e.g -42)</li>
-<li>3.用辗转相除把带转化数的绝对值转化成二进制 42 -&gt; <span class="arithmatex">\((101010)_2\)</span></li>
+<li>3.用短除把带转化数的绝对值转化成二进制 42 -&gt; <span class="arithmatex">\((101010)_2\)</span></li>
 <li>4.补齐数位：7-bits，转化完只有6-bits，前面填0补到7位 <span class="arithmatex">\((0101010)_2\)</span></li>
 <li>5.如果第2步中确定的数为正数，则到此为止，如果为负数，继续转化</li>
 <li>6.把0变成1，1变成0（补码） <span class="arithmatex">\((1010101)_2\)</span></li>
