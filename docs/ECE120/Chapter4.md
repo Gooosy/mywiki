@@ -64,7 +64,7 @@ e.g implement function Q = ((A+B')C)'
 
 
 
-## Heuristics Methods （启发式方法判断逻辑表达式的优劣）
+## Heuristics Methods
 （not very important -- at least I think it won't be included in the exam）
 
 已知三个逻辑表达式等价，F = ABC + ABC' + AB'C = AC + AB = A(B+C)，具体证明可以用boolean的运算法则，也可以绘制真值表，那么在设计电路的时候应该如何选择这三种表达式呢？
