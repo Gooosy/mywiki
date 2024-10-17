@@ -117,7 +117,7 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-bs-level="2"><a href="#heuristics-methods" class="nav-link">Heuristics Methods （启发式方法判断逻辑表达式的优劣）</a>
+            <li class="nav-item" data-bs-level="2"><a href="#heuristics-methods" class="nav-link">Heuristics Methods</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -166,7 +166,7 @@
 <p><img alt="3_complete" height="auto" src="../picture/c4/3_complete.png" width="300" /></p>
 <p>这种题目也是两种办法，第一个根据已经给出的电路写出逻辑表达式，从最内层（C D）开始依次往外写，根据电路串并联情况，得Q = (C' + D')B' + A'，然后根据De Morgan's Laws把公式变形成Q'型的 Q = (CD)'B' + A' = (((CD)'B')'A)' -&gt; Q' = ((CD)'B')'A = (CD + B)A，这种办法比较麻烦，而且在化简时容易出错。推荐第二种方法，直接使用MOSFET电路的对偶性，串联变成并联，并联变成串联。注意逐层分析，如C D并联再与B串联，变成C D串联再与B并联，BCD整体与A并联，变成BCD整体与A串联</p>
 <p><img alt="3_answer" height="auto" src="../picture/c4/3_answer.png" width="300" /></p>
-<h2 id="heuristics-methods">Heuristics Methods （启发式方法判断逻辑表达式的优劣）<a class="headerlink" href="#heuristics-methods" title="Permanent link">&para;</a></h2>
+<h2 id="heuristics-methods">Heuristics Methods<a class="headerlink" href="#heuristics-methods" title="Permanent link">&para;</a></h2>
 <p>（not very important -- at least I think it won't be included in the exam）</p>
 <p>已知三个逻辑表达式等价，F = ABC + ABC' + AB'C = AC + AB = A(B+C)，具体证明可以用boolean的运算法则，也可以绘制真值表，那么在设计电路的时候应该如何选择这三种表达式呢？</p>
 <p>首先要确定Metrics（即，我们衡量好坏的指标 e.g 电路响应时间越短越好？使用的逻辑门越少越好？）在确定了指标的前提下，想要去判断好坏，第一种简单的想法就是，我实际把电路搭出来，测试一下好坏。但是当我的系统非常复杂的时候，逻辑表达式非常复杂，实际搭出电路可能耗时费力花钱。所以我们希望使用一种启发式的方法，这种方法的满足</p>

@@ -30,7 +30,7 @@ MOSFET分为两种n-type和p-type，对于120的来说，这两种MOSFET都可�
 
 基于这个原则，来尝试一下各个考点的题目。
 
-### 1.写逻辑表达式
+### 1写逻辑表达式
 
 根据如下电路图写出Q的表达式
 
@@ -40,7 +40,7 @@ MOSFET分为两种n-type和p-type，对于120的来说，这两种MOSFET都可�
 
 验证两个表达式是否相同可以用De Morgan's Laws: Q = (AB + C)' = (AB)'C' = (A' + B')C'
 
-### 2.画电路图
+### 2画电路图
 e.g implement function Q = ((A+B')C)'
 
 先分析一下，最外面一层是'，符合输出法则中n-type的输出，即Q' = (A + B')C，所以从下半部分电路开始搭建比较方便。注意B需要非一下，所以让输入先过一个非门，形成B'。下半部分电路A与B'并联，再与C串联，搭建好之后如下：
@@ -54,7 +54,7 @@ e.g implement function Q = ((A+B')C)'
 ![2_whole](./picture/c4/1_whole.png){: width="250" height="auto"}
 
 
-### 3.补全电路图
+### 3补全电路图
 
 ![3_complete](./picture/c4/3_complete.png){: width="300" height="auto"}
 
