@@ -64,6 +64,10 @@
 <li>
     <a href="./" class="dropdown-item active" aria-current="page">第四章</a>
 </li>
+                                    
+<li>
+    <a href="../Chapter5/" class="dropdown-item">第五章</a>
+</li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
@@ -89,7 +93,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a rel="next" href="../../ECE220/%E5%BA%8F/" class="nav-link">
+                                <a rel="next" href="../Chapter5/" class="nav-link">
                                     Next <i class="fa fa-arrow-right"></i>
                                 </a>
                             </li>
@@ -150,19 +154,19 @@
 <p>仅看电路的下半部分，根据2并联法则+3输入法则，表达式应该写成 A + B，根据4输出法则，最终的式子写成 Q' = A + B，化成Q的表达式 Q = (A + B)'，可以清楚地看到这个门电路就是NOR</p>
 <p>其实根据De Morgan's Laws：1.A'B' = (A + B)' 2.(AB)' = A' + B' 我们知道根据电路上半部分和下半部分写出来的表达式是完全等价的，这个就是电路的对偶性（AND变OR，OR变AND）</p>
 <p>基于这个原则，来尝试一下各个考点的题目。</p>
-<h3 id="1">1.写逻辑表达式<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
+<h3 id="1">1写逻辑表达式<a class="headerlink" href="#1" title="Permanent link">&para;</a></h3>
 <p>根据如下电路图写出Q的表达式</p>
 <p><img alt="2_read_circuit" height="auto" src="../picture/c4/2_read_circuit.png" width="250" /></p>
 <p>看一半。如果选择看电路的上半部分：根据12串并联法则+3输入法则，可以写出(A' + B')C'，根据4输出法则，得 Q = (A' + B')C'。如果选择看电路的下半部分：根据12串并联法则+3输入法则，可以写出 AB + C，根据4输出法则得 Q' = AB + C -&gt; Q = (AB + C)'</p>
 <p>验证两个表达式是否相同可以用De Morgan's Laws: Q = (AB + C)' = (AB)'C' = (A' + B')C'</p>
-<h3 id="2">2.画电路图<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
+<h3 id="2">2画电路图<a class="headerlink" href="#2" title="Permanent link">&para;</a></h3>
 <p>e.g implement function Q = ((A+B')C)'</p>
 <p>先分析一下，最外面一层是'，符合输出法则中n-type的输出，即Q' = (A + B')C，所以从下半部分电路开始搭建比较方便。注意B需要非一下，所以让输入先过一个非门，形成B'。下半部分电路A与B'并联，再与C串联，搭建好之后如下：</p>
 <p><img alt="1_half" height="auto" src="../picture/c4/1_half.png" width="250" /></p>
 <p>如何搭建上半部分电路，有两种方法。复杂一点的，根据De Morgan's Laws把前面Q'（Q' = (A + B')C）的表达式化成Q的表达式：Q = ((A+B')C)' -&gt; Q = (A + B')' + C' -&gt; = Q = A'B + C' 注意根据输入法则，p-type输入带非，所以A' C'相当于A C直接接p-type输入端口，而B，相当于B'接p-type输入端口，据此表达式可以补全电路。</p>
 <p>方法二，根据电路的对偶性直接补全。下半部分串联到上半部分改并联，下半部分并联到上半部分改串联。</p>
 <p><img alt="2_whole" height="auto" src="../picture/c4/1_whole.png" width="250" /></p>
-<h3 id="3">3.补全电路图<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<h3 id="3">3补全电路图<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
 <p><img alt="3_complete" height="auto" src="../picture/c4/3_complete.png" width="300" /></p>
 <p>这种题目也是两种办法，第一个根据已经给出的电路写出逻辑表达式，从最内层（C D）开始依次往外写，根据电路串并联情况，得Q = (C' + D')B' + A'，然后根据De Morgan's Laws把公式变形成Q'型的 Q = (CD)'B' + A' = (((CD)'B')'A)' -&gt; Q' = ((CD)'B')'A = (CD + B)A，这种办法比较麻烦，而且在化简时容易出错。推荐第二种方法，直接使用MOSFET电路的对偶性，串联变成并联，并联变成串联。注意逐层分析，如C D并联再与B串联，变成C D串联再与B并联，BCD整体与A并联，变成BCD整体与A串联</p>
 <p><img alt="3_answer" height="auto" src="../picture/c4/3_answer.png" width="300" /></p>

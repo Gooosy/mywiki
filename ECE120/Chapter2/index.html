@@ -64,6 +64,10 @@
 <li>
     <a href="../Chapter4/" class="dropdown-item">第四章</a>
 </li>
+                                    
+<li>
+    <a href="../Chapter5/" class="dropdown-item">第五章</a>
+</li>
                                 </ul>
                             </li>
                             <li class="nav-item dropdown">
@@ -420,7 +424,44 @@ ABS'是1的情况就是ABS = 110，即两个负数相加得到正数，overflow�
 <p><img alt="demorgan_graph" src="../picture/c2/circuit_2NOR.png" style="float: left; width: 600px;" /></p>
 <div style="clear: both;"></div>
 
-<h2 id="duality">逻辑表达式的对偶性（Duality）<a class="headerlink" href="#duality" title="Permanent link">&para;</a></h2></div>
+<h2 id="duality">逻辑表达式的对偶性（Duality）<a class="headerlink" href="#duality" title="Permanent link">&para;</a></h2>
+<p>布尔表达式有对偶性，得到其对偶式子的方法为：1.AND 变 OR，OR 变 AND 2.1变0，0变1</p>
+<p>对偶式子表示的逻辑和原布尔表达式并不相同，对偶性主要用在：</p>
+<ul>
+<li>设计CMOS电路中（参见<a href="../Chapter4/#3补全电路图">对偶性补全电路</a>）</li>
+<li>从F表达式快速获得F'表达式（是对偶性补全电路背后的数学原理）</li>
+<li>从已知逻辑表达式等式推出对偶形式的等式</li>
+</ul>
+<h3 id="2ff">2从F得到F'<a class="headerlink" href="#2ff" title="Permanent link">&para;</a></h3>
+<p>从F得到F'，一般要用DeMorgan’s Laws逐步推导，更快捷的方式是先求出F得对偶式，然后把每个literal都取非</p>
+<p>F = AB (C + (DL'G(B' + A + E))) (H + (J'A'B))</p>
+<p>1.用DeMorgan’s Law</p>
+<p>F' = (AB (C + (DL'G(B' + A + E))) (H + (J'A'B)))'</p>
+<p>从最外层开始打开</p>
+<p>F' = A' + B' + (C + (DL'G(B' + A + E)))' + (H + (J'A'B))'</p>
+<p>F' = A' + B' + C'(DL'G(B' + A + E))' + H'(J'A'B)'</p>
+<p>F' = A' + B' + C'(D' + L + G' + (B' + A + E)') + H'(J + A + B)</p>
+<p>F' = A' + B' + C'(D' + L + G' + BA'E') + H'(J + A + B)</p>
+<p>2.用对偶性</p>
+<p>F 的对偶 = A + B + (C (D + L' + G + (B'AE))) +(H (J' + A' + B))</p>
+<p>把对偶式子里面的每个字母都取非</p>
+<p>F' = A' + B' + C'(D' + L + G' + BA'E') + H'(J + A + B)</p>
+<p>用对偶式子得到F'的原理是用DeMorgan’s Law来逐层展开就会导致AND变成OR，OR变成AND，并且literal加非</p>
+<h3 id="3">3对偶等式<a class="headerlink" href="#3" title="Permanent link">&para;</a></h3>
+<p>已知：</p>
+<p>A(B+C) = AB + AC</p>
+<p>根据对偶性（等式左右都变成对偶式子）得到</p>
+<p>A + BC = (A + B)(A + C)</p>
+<p>已知：DeMorgan’s Laws</p>
+<p>(A + B)' = A'B'</p>
+<p>根据对偶性得到</p>
+<p>(AB)' = A' + B'</p>
+<p>已知：</p>
+<p>AB + A'C + BC = AB + A'C</p>
+<p>注：这个等式可以用k-map推导，也可以用逻辑表达式运算得到 BC = A'BC + ABC -&gt; AB + A’C + BC = AB + A’C + A'BC + ABC 因为AB是包含ABC A'C是包含A'BC的，所以后两项被前两项“吸收” = AB + A'C</p>
+<p>根据对偶性得到</p>
+<p>(A + B)(A' + C)(B + C) = (A + B)(A' + C)</p>
+<p>怎么理解原等式成立，对偶后的等式成立？首先要明确，对偶后的式子不等于原始式子，如 F = A + B 肯定不会等于 F = AB。对偶等式的两边，就像对两个函数进行相同的操作，操作完函数仍然相等（类比：f(x) = g(x) -&gt; f'(x) = g'(x)原函数相等，导函数相等）</p></div>
             </div>
         </div>
 
